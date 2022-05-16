@@ -1,12 +1,7 @@
 # work-in-progress RPM packages for rpm-sequoia
 
-### Steps to build:
+The contents of this repository is made available under the default license
+terms of official Fedora packaging files, i.e. the MIT license:
 
-- modify .spec file
-- build SRPM file: `rpmbuild -bs rust-rpm-sequoia.spec`
-- build RPM files: `mock -r fedora-rawhide-x86_64 ./*.src.rpm`
+<https://fedoraproject.org/wiki/Licensing:Main#License_of_Fedora_SPEC_Files>
 
-### TODO:
-
-- unversioned .so file in `%{_libdir}` is forbidden
-- fix `License` tag to reflect statically linked dependencies
