@@ -75,8 +75,9 @@ cp %{SOURCE1} .
 %install
 # install shared library
 mkdir -p %{buildroot}/%{_libdir}
-cp -pav target/release/*.so* %{buildroot}/%{_libdir}/
-
+# FIXME: create symlink the correct way round
+cp -pav target/release/librpm_sequoia.so %{buildroot}/%{_libdir}/librpm_sequoia.so.0
+ln -s librpm_sequoia.so.0 %{buildroot}/%{_libdir}/librpm_sequoia.so
 # install pkg-config file
 mkdir -p %{buildroot}/%{_libdir}/pkgconfig
 cp -pav target/release/rpm-sequoia.pc %{buildroot}/%{_libdir}/pkgconfig/
