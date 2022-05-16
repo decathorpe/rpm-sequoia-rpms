@@ -5,7 +5,7 @@
 %global crate rpm-sequoia
 
 Name:           rust-%{crate}
-Version:        0.1.0
+Version:        0.2.0
 Release:        1%{?dist}
 Summary:        Implementation of the RPM PGP interface using Sequoia
 
@@ -32,6 +32,8 @@ Summary:        %{summary}
 %license LICENSE.txt
 %doc README.md
 %{_libdir}/librpm_sequoia.so
+%{_libdir}/librpm_sequoia.so.0
+%{_datadir}/pkgconfig/rpm-sequoia.pc
 
 %prep
 %autosetup -n %{crate}-%{version_no_tilde} -p1
@@ -45,8 +47,9 @@ Summary:        %{summary}
 
 %install
 mkdir -p %{buildroot}/%{_libdir}
-# FIXME: unversioned .so file can't live in %%{_libdir}
-cp -pav target/release/*.so %{buildroot}/%{_libdir}/
+cp -pav target/release/*.so* %{buildroot}/%{_libdir}/
+mkdir -p %{buildroot}/%{_datadir}/pkgconfig
+cp -pav target/release/rpm-sequoia.pc %{buildroot}/%{_datadir}/pkgconfig/
 
 %if %{with check}
 %check
@@ -54,5 +57,8 @@ cp -pav target/release/*.so %{buildroot}/%{_libdir}/
 %endif
 
 %changelog
+* Mon 16 May 2022 Neal H. Walfield <neal@sequoia-pgp.org> - 0.2.0-1
+- Package version 0.2.0
+
 * Thu May 12 2022 Fabio Valentini <decathorpe@gmail.com> - 0.1.0-1
 - Initial package
